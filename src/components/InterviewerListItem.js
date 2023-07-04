@@ -11,7 +11,7 @@ const interviewerClass = classNames("interviewers__item", {
 
   return (
     <li 
-      onClick={() => props.setInterviewer(props.id)} 
+    onClick={props.setInterviewer}
       className={interviewerClass}
     >
       {props.avatar && 
