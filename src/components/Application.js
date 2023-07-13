@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
@@ -44,54 +44,45 @@ const appointments = {
 };
 
 export default function Application(props) {
-  const days = [
-    {
-      id: 1,
-      name: "Monday",
-      spots: 2,
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      spots: 5,
-    },
-    {
-      id: 3,
-      name: "Wednesday",
-      spots: 0,
-    },
-  ]
-  
-  const [day, setDay] = useState("Monday");
-  
+const [day, setDay] = useState("Monday");
+const [days, setDays] = useState([]);
+
+useEffect(() => {
+  axios.get("/api/days")
+    .then(response => {
+      console.log(response.data);
+      setDays(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}, []);
+
   return (
     <main className="layout">
       <section className="sidebar">
-        {
-          <>
-            <img
-              className="sidebar--centered"
-              src="images/logo.png"
-              alt="Interview Scheduler"
-            />
-            <hr className="sidebar__separator sidebar--centered" />
-            <nav className="sidebar__menu">
+        <img
+          className="sidebar--centered"
+          src="images/logo.png"
+          alt="Interview Scheduler"
+        />
+        <hr className="sidebar__separator sidebar--centered" />
+        <nav className="sidebar__menu">
           <DayList
             days={days}
             value={day}
             onChange={setDay}
           />
-          </nav>
-            <img
-              className="sidebar__lhl sidebar--centered"
-              src="images/lhl.png"
-              alt="Lighthouse Labs"
-            />
-          </>
-        }
+        </nav>
+        <img
+          className="sidebar__lhl sidebar--centered"
+          src="images/lhl.png"
+          alt="Lighthouse Labs"
+        />
+        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-      {Object.values(appointments).map(appointment => (
+        {Object.values(appointments).map(appointment => (
           <Appointment 
             key={appointment.id}
             {...appointment}
