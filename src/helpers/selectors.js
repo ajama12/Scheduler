@@ -13,6 +13,22 @@ export function getAppointmentsForDay(state, day) {
 
 }
 
+export function getInterviewersForDay(state, day) {
+  let foundInterviewer = "";
+  let finalInterviewersArr = [];
+  for(const dayIndex in state.days) {
+    console.log(state.days[dayIndex].name)
+    if (state.days[dayIndex].name === day) {
+      foundInterviewer = state.days[dayIndex].interviewers;
+      console.log(foundInterviewer);
+    }
+  }
+  for(const interviewerDetails of foundInterviewer) {
+    finalInterviewersArr.push(state.interviewers[interviewerDetails]);
+  }
+  return finalInterviewersArr;
+}
+
 export function getInterview(state, interview) {
 
   if (interview === null) {
