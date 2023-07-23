@@ -33,9 +33,6 @@ return axios.put(`/api/appointments/${id}`, {interview})
       appointments
     });
   })
-  .catch(err => {
-    console.log(err);
-  })
 }
 
 const cancelInterview = function(id) {
@@ -54,9 +51,6 @@ const cancelInterview = function(id) {
         appointments
       })
     })
-    .catch((err) => {
-      console.log(err);
-    })
 }
 useEffect(() => {
   Promise.all([
@@ -70,9 +64,7 @@ useEffect(() => {
       appointments: all[1].data, 
       interviewers: all[2].data
     }));
-  }).catch(error => {
-      console.log(error);
-    });
+  })
 }, []);
 
   return (
