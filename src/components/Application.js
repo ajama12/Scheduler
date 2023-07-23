@@ -52,6 +52,7 @@ const dailyAppointments = getAppointmentsForDay(state, state.day).map(
       </section>
       <section className="schedule">
         {dailyAppointments}
+        <Appointment key={"last"} />
       </section>
     </main>
   );
