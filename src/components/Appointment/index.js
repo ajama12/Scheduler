@@ -17,6 +17,7 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const CONFIRM = "CONFIRM";
   const DELETING = "DELETING"
+  const EDIT = "EDIT";
 
   const {mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -28,10 +29,14 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview)
-      .then(() => {
+     props.bookInterview(props.id, interview)
+     .then(() => {
+      if (mode === CREATE) {
         transition(SHOW);
-      })
+      } else if (mode === EDIT) {
+        transition(SHOW);
+      }
+    })
   };
 
   const cancel = function() {
@@ -45,19 +50,27 @@ export default function Appointment(props) {
         transition(EMPTY);
       })
     }
+    if (mode === EDIT) {
+      transition(SHOW);
+    }
   };
 
 return (
   <Fragment>
   <article className="appointment">
     <Header time={props.time}/>
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && props.interview && (
-      <Show
-        student={props.interview.student}
-        interviewer={props.interview.interviewer}
-        onDelete={cancel}
-      />
+      {mode === EMPTY && ( 
+        <Empty 
+          onAdd={() => transition(CREATE)} 
+        />
+      )}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+          onDelete={cancel}
+          onEdit={() => transition(EDIT)}
+        />
       )}
       {mode === CREATE && 
         <Form 
@@ -82,6 +95,15 @@ return (
           message="Deleting"
         />
       )}
+      {mode === EDIT && (
+        <Form 
+          interviewers={props.interviewers} 
+          onCancel={back}
+          onSave={save}
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+        /> 
+        )}
   </article>
   </Fragment>
 )

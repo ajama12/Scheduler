@@ -28,17 +28,17 @@ const save = () => {
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
         <input
           className="appointment__create-input text--semi-bold"
-          name={student}
+          value={student}
           type="text"
           placeholder="Enter Student Name"
           onChange={(event)=> setStudent(event.target.value)}
         />
       </form>
       <InterviewerList 
-        value={interviewer}
-        onChange={setInterviewer}
-        interviewers={props.interviewers}
-      />
+          value={interviewer}
+          onChange={setInterviewer}
+          interviewers={props.interviewers}
+        />
     </section>
     <section className="appointment__card-right">
       <section className="appointment__actions">
