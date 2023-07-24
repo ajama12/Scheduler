@@ -32,11 +32,17 @@ describe("Application", () => {
     });
 
     fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
-
     fireEvent.click(getByText(appointment, "Save"));
 
-    console.log(prettyDOM(appointment));
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
+    const days = getAllByTestId(container, "day")
+    const monday = days.find((day) => getByText(day, "Monday"))
+
+    expect(monday).toHaveTextContent("no spots remaining")
+  
   });
 
 });

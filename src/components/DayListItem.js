@@ -7,7 +7,7 @@ import classNames from "classnames";
 function formatSpots(props){
   let formattedSpots = props.spots;
 
-    if(props.selected && formattedSpots >= 0) {
+    if(props.selected && formattedSpots > 0) {
       formattedSpots -= 1;
     }
     return formattedSpots
@@ -21,6 +21,7 @@ export default function DayListItem(props) {
   });
   return (
     <li 
+      data-testid="day"
       className={dayClass} 
       onClick={() => props.setDay(props.name)}
     > 
