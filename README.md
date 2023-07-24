@@ -23,7 +23,7 @@ npm run storybook
 ```
 
 ## Homepage
-!["Homepage"](Interview_Scheduler_Homepage.png)
+!["Homepage"](Interview_Scheduler_Home.png)
 
 ## Add Appointment
 !["Screen when adding appointment"](Add_Interview.png)
