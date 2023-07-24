@@ -17,7 +17,6 @@ const updateSpots = function(appointments) {
   const emptySpots = day.appointments.filter((appointment) => {
     return !appointments[appointment].interview
   });  
-  console.log(emptySpots.length);
   const spots = emptySpots.length
   return {...day, spots}
 })
@@ -70,10 +69,11 @@ const cancelInterview = function(id) {
       const appointments = {
         ...state.appointments, 
         [id]: appointment
-      }; 
+      };
+
       setState({
         ...state, 
-        appointments
+        appointments, 
       })
       updateSpots(appointments);
     })
