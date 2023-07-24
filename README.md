@@ -21,3 +21,13 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Homepage
+!["Homepage"](Interview_Scheduler_Homepage.png)
+
+## Add Appointment
+!["Screen when adding appointment"](Add_Interview.png)
+
+## Delete Appointment 
+!["Screen when deleting appointment"](Delete_Interview.png)
+
