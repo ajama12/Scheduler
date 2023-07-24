@@ -67,7 +67,7 @@ export default function Appointment(props) {
 
 return (
   <Fragment>
-  <article className="appointment">
+  <article  data-testid="appointment" className="appointment">
     <Header time={props.time}/>
       {mode === EMPTY && ( 
         <Empty 
